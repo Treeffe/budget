@@ -1,0 +1,127 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Administration du site{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 5%">
+<h2 class="text-center">{{ block('title') }}</h2>
+</div>
+
+<div>
+    <h2>Listes de categorie de compte</h2>
+</div>
+{% if categoriesComptes %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                </tr>
+            </thead>
+            {% for categorieCompte in categoriesComptes %}
+                <tr>
+                    <td>{{ categorieCompte.libelleCategorieCompte }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune compte trouvé.</div>
+{% endif %}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Ajouter categorie compte
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ajout d'un compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div >
+    <form action="{{ path('add_categorie_compte') }}" method="post">
+        <div class="form-group">
+		      <div class="input-group">
+                <div class="col-md-12">
+                    Libellé categorie compte :<input type="text" name="libelleCategorieCompte" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                <input type="submit" class="btn btn-primary" value="modif" />
+            </div>
+        </div>        
+    </form>
+</div>  
+</div>
+</div>  
+</div>
+</div>
+<div>
+    <h2>Listes de categorie de Transaction</h2>
+</div>
+{% if categoriesTransactions %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                </tr>
+            </thead>
+            {% for categorieTransaction in categoriesTransactions %}
+                <tr>
+                    <td>{{ categorieTransaction.libelleCategorieTansaction }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune compte trouvé.</div>
+{% endif %}
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ajjoutcattr">
+  Ajouter un categorie transaction
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ajjoutcattr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ajout d'un compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div >
+    <form action="{{ path('add_categorie_transaction') }}" method="post">
+        <div class="form-group">
+		  <div class="input-group">
+                <div class="col-md-12">
+                    Libellé categorie transaction :<input type="text" name="libelleCategorieTransaction" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                <input type="submit" class="btn btn-primary" value="modif" />
+            </div>
+        </div>        
+    </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

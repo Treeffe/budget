@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : StoneWork 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20140228
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>BUDGET</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{ app.request.basepath }}/css/chic.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />    
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="{{ path('home') }}">budget</a></h1>
+		</div>
+		<div id="menu">
+		 <div class="collapse navbar-collapse" id="navbar-collapse-target">*
+                      
+
+                    <ul class="nav navbar-nav ">
+                        <li>
+                            <a href="" class="dropdown-toggle" accesskey="1" data-toggle="dropdown">HOMME <b class="caret"></b></a>
+                            <ul class="dropdown-menu">    
+                                <li><a href="{{ path('articles_hommes') }}">Consulter</a></li>        
+                            </ul>
+                          </li>
+                        
+                        <li>
+                            <a href="" class="dropdown-toggle" accesskey="2" data-toggle="dropdown">FEMME <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('articles_femmes') }}">Consulter</a></li>       
+                            </ul>                            
+                         </li> 
+                        
+                        <li>
+                            <a href="" accesskey="3" class="dropdown-toggle" data-toggle="dropdown">ENFANT <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="{{ path('articles_enfants') }}">Consulter</a></li>        
+                            </ul>
+                           
+                        </li>
+                        <li>
+                            <a href="" accesskey="4" class="dropdown-toggle" data-toggle="dropdown">TOUS LES ARTICLES <b class="caret">                                   </b></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="{{ path('articles') }}">Consulter</a></li>        
+                            </ul>
+                           
+                        </li>
+                       
+                    </ul>
+                </div>
+	</div>
+	<div id="banner" class="container">
+		<div class="title">
+			<h2>Maecenas luctus lectus</h2>
+			<span class="byline">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</span>
+		</div>
+		<ul class="actions">
+			<li><a href="#" class="button">Etiam posuere</a></li>
+		</ul>
+	</div>
+</div>
+<div id="wrapper">
+	<div id="three-column" class="container">
+		<div class="title">
+			<h2>Fusce ultrices fringilla metus</h2>
+			<span class="byline">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue</span>
+		</div>
+		<div class="boxA">
+			<span class="fa fa-cloud-download"></span>
+			<p>Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad  torquent per conubia nostra.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+		<div class="boxB">
+			<span class="fa fa-cogs"></span>
+			<p>Etiam neque. Vivamus consequat lorem at nisl. Nullam  wisi a sem semper eleifend. Donec mattis.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+		<div class="boxC">
+			<span class="fa fa-wrench"></span>
+			<p> Aenean lectus lorem, imperdiet at, ultrices eget, ornare et, wisi. Pellentesque adipiscing purus.</p>
+			<a href="#" class="button button-alt">More Info</a>
+		</div>
+	</div>
+</div>
+<div id="welcome">
+	<div class="container">
+		<div class="title">
+			<h2>Fusce ultrices fringilla metus</h2>
+			<span class="byline">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue</span>
+		</div>
+		<p>This is <strong>StoneWork</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
+		<ul class="actions">
+			<li><a href="#" class="button">Etiam posuere</a></li>
+		</ul>
+	</div>
+</div>
+        <!-- jQuery -->
+    <script src="{{ app.request.basepath }}/lib/jquery/jquery.min.js"></script>
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

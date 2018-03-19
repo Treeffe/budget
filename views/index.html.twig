@@ -1,0 +1,84 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block meta  %}
+        
+        <meta name="description" content="Elastic Image Slideshow with Thumbnail Preview" />
+        <meta name="keywords" content="jquery, css3, responsive, image, slider, slideshow, thumbnails, preview, elastic" />
+        <meta name="author" content="Codrops" />
+        <meta http-equiv="Content-Type" content="text/html">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+        <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+        <script type="text/javascript" src="web/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="web/js/jquery.glide.min.js"></script>
+        
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="css/noscript.css" />
+		</noscript>
+
+
+{% endblock %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+
+
+            <div class="wrapper" >
+                <div id="ei-slider" class="ei-slider">
+                    <ul class="ei-slider-large" >
+						
+                        <li>
+                            <img src="images/large/1.jpg" alt="image01" />
+                            <div class="ei-title">
+                                <h2>Porte-monnaie</h2>
+                                <h3>wallet</h3>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/large/2.jpg" alt="image02" />
+                            <div class="ei-title">
+                                <h2>Transaction</h2>
+                                <h3>Transaction</h3>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/large/3.jpg" alt="image03"/>
+                            <div class="ei-title">
+                                <h2>Compte</h2>
+                                <h3>Account</h3>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/large/4.jpg" alt="image04"/>
+                            <div class="ei-title">
+                                <h2>Banque</h2>
+                                <h3>Bank</h3>
+                            </div>
+                        </li>
+                        
+                    </ul><!-- ei-slider-large -->
+                    <ul class="ei-slider-thumbs">
+                        <li class="ei-slider-element">Current</li>
+						
+                        <li><a href="#">Slide 1</a><img src="images/thumbs/1.jpg" alt="thumb01" /></li>
+                        <li><a href="#">Slide 2</a><img src="images/thumbs/2.jpg" alt="thumb02" /></li>
+                        <li><a href="#">Slide 3</a><img src="images/thumbs/3.jpg" alt="thumb03" /></li>
+                        <li><a href="#">Slide 4</a><img src="images/thumbs/4.jpg" alt="thumb04" /></li>
+                        
+                    </ul><!-- ei-slider-thumbs -->
+                </div><!-- ei-slider -->
+               <div class="reference">
+					<h1>BUDGET</h1>
+                   <h2><center>Site permettant de savoir ou on en est avec son porte monnaie digitalisé</center></h2>
+                </div>
+            </div><!-- wrapper -->
+  {% endblock %}
+
+   
+
+

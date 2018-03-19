@@ -1,0 +1,111 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Les transactions{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 5%">
+<h2 class="text-center">{{ block('title') }}</h2>
+{% if transactions %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                    <th>type de la transaction</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.libelleTransaction }}</td>
+                     <td>{{ transaction.categorieTransaction.libelleCategorieTransaction }} </td>
+                    <td>{{ transaction.montant }}</td>
+                    <td>{{ transaction.dateTransaction }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune transaction trouvé.</div>
+{% endif %}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Ajouter une transaction
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ajout d'un compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div >
+    <form action="{{ path('add_transaction') }}" method="post">
+        <div class="form-group">
+		      <div class="input-group">
+                <div class="col-md-12">
+                    Libellé du transaction :<input type="text" name="libelle" class="form-control">
+                </div>
+                <div class="col-md-12">
+                    Montant de la transaction : <input type="number" name="montant" class="form-control">
+                </div>
+                  <div class="well">
+  <div id="datetimepicker1" class="input-append date">
+    <input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+</div>
+                <div class="col-md-6 ">
+                Compte credit : 
+                    <select class="form-control" name="compteCredit" size="1">
+                        {% for compte in comptes %} 
+                            <option value="{{ compte.ID }}">{{ compte.libelleCompte }} --------> {{ compte.montantCompte }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 ">
+                Compte débit : 
+                    <select class="form-control" name="compteDebit" size="1">
+                        {% for compte in comptes %} 
+                            <option value="{{ compte.ID }}">{{ compte.libelleCompte }} --------> {{ compte.montantCompte }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-12 ">
+                Catégorie du compte : 
+                    <select class="form-control" name="categorieTransaction" size="1">
+                        
+                        {% for cat in categoriesTransactions %} 
+                            <option value="{{ cat.ID }}">{{ cat.libelleCategorieTansaction }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                <input type="submit" class="btn btn-primary" value="sauvegarder la transaction" />
+            </div>
+        </div>        
+    </form>
+</div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+</div>
+{% endblock %}

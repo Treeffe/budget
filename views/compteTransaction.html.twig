@@ -20,9 +20,19 @@
                 </tr>
             </thead>
             {% for categorieCompte in categoriesComptes %}
+            <div>
+                
                 <tr>
-                    <td>{{ categorieCompte.libelleCategorieCompte }}</td>
+                    <div><td>{{ categorieCompte.libelleCategorieCompte }}</td></div>
+                    <div>
+                        <td>
+                            <a type="submit" href="{{ app.request.basepath }}/deleteCategorieCompte/{{ categorieCompte.ID }}" class="btn btn-danger">
+                                 <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </div>
                 </tr>
+            </div>
             {% endfor %}
         </table>
     </div>
@@ -77,9 +87,18 @@
                 </tr>
             </thead>
             {% for categorieTransaction in categoriesTransactions %}
+            <div class="col-md-12 col-sm-12">
                 <tr>
-                    <td>{{ categorieTransaction.libelleCategorieTansaction }}</td>
+                    <div class="col-md-11 col-sm-11"><td>{{ categorieTransaction.libelleCategorieTansaction }}</td></div>
+                    <div class="col-md-1 col-sm-1">
+                        <td>
+                            <a type="submit" href="{{ app.request.basepath }}/deleteCategorieTransaction/{{ categorieTransaction.ID }}" class="btn btn-danger">
+                                 <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </div>
                 </tr>
+            </div>
             {% endfor %}
         </table>
     </div>

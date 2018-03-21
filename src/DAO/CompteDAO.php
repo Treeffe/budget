@@ -29,6 +29,9 @@ class CompteDAO extends DAO
         $compte->setNomTitulaire($row['nomTitulaire']);
         $compte->setPrenomTitulaire($row['prenomTitulaire']);
         $compte->setMontantCompte($row['MontantCompte']);
+        $idCategoriecompte = $row['IDCategorieCompte'];
+        $idUser = $row['IDUser'];
+        
         
         if (array_key_exists('IDCategorieCompte', $row)) {
             $idCategorieCompte = $row['IDCategorieCompte'];
@@ -36,7 +39,8 @@ class CompteDAO extends DAO
             $compte->setCategorieCompte($categorieCompte);
         }
         
-        if (array_key_exists('IDUser', $row)) {
+        
+        if (array_key_exists('IDUser', $row) || iduser > 0) {
             $idVisiteur = $row['IDUser'];
             $visiteur = $this->visiteurDAO->find($idVisiteur);
             $compte->setUser($visiteur);
@@ -65,8 +69,8 @@ class CompteDAO extends DAO
         $row = $this->getDb()->fetchAssoc($sql, array($code));
         if ($row)
             return $this->buildDomainObject($row);
-        else
-            throw new \Exception("Aucun compte trouvé");
+        //else
+            //throw new \Exception("Aucun compte trouvé");
     }
     
     public function saveCompte($idCategorieCompte, $idUser, $libelle, $montant)
@@ -85,4 +89,12 @@ class CompteDAO extends DAO
         $sql = "UPDATE compte SET montantCompte=? WHERE ID = ?";
         $test = $this->getDb()->executeUpdate($sql, array( $nouveauMontant, $idCompte));
     }
+    
+    public function modificationCategorieCompte($idCatDel, $idCategorieCompte)
+    {   
+        $sql = "UPDATE compte SET IDCategorieCompte=? WHERE IDCategorieCompte = ?";
+        $test = $this->getDb()->executeUpdate($sql, array( $idCategorieCompte, $idCatDel));
+    }
+    
+    
 }

@@ -85,10 +85,10 @@ class CategorieCompteDAO extends DAO
         $this->getDb()->executeQuery($sql, array($id));
     }
     
-    public function modificationCategorieCompte($idCatDel, $libelle)
+    public function modificationLibelleCategorieCompte($idCat, $libelle)
     {   
-        $sql = "UPDATE compte SET libelleCategorieCompte = ? WHERE IDCategorieCompte=?";
-        $this->getDb()->executeUpdate($sql, array( $idCategorieCompte, $libelle));
+        $sql = "UPDATE categorieCompte SET libelleCategorieCompte=? WHERE ID = ?";
+        $test = $this->getDb()->executeUpdate($sql, array( $libelle, $idCat));
     }
     
     

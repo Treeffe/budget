@@ -29,10 +29,44 @@
                             <a type="submit" href="{{ app.request.basepath }}/deleteCategorieCompte/{{ categorieCompte.ID }}" class="btn btn-danger">
                                  <span class="glyphicon glyphicon-remove"></span>
                             </a>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifCompte">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </button>
                         </td>
                     </div>
                 </tr>
             </div>
+            <!-- Modal -->
+<div class="modal fade" id="modifCompte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modification d'une categorie de compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div >
+    <form action="{{ app.request.basepath }}/modifCategorieCompte/{{categorieCompte.ID}}" method="post">
+        <div class="form-group">
+		      <div class="input-group">
+                <div class="col-md-12">
+                    Libellé categorie compte :<input type="text" name="libelle" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                <input type="submit" class="btn btn-primary" value="Modifier" />
+            </div>
+        </div>        
+    </form>
+</div>  
+</div>
+</div>  
+</div>
+</div>
             {% endfor %}
         </table>
     </div>
@@ -66,7 +100,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
-                <input type="submit" class="btn btn-primary" value="modif" />
+                <input type="submit" class="btn btn-primary" value="Sauvegarder" />
             </div>
         </div>        
     </form>
@@ -75,6 +109,8 @@
 </div>  
 </div>
 </div>
+
+
 <div>
     <h2>Listes de categorie de Transaction</h2>
 </div>
@@ -95,10 +131,45 @@
                             <a type="submit" href="{{ app.request.basepath }}/deleteCategorieTransaction/{{ categorieTransaction.ID }}" class="btn btn-danger">
                                  <span class="glyphicon glyphicon-remove"></span>
                             </a>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifTransaction">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </button>
                         </td>
                     </div>
                 </tr>
             </div>
+            <div class="modal fade" id="modifTransaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modifier categorie de transaction</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div >
+                <form action="{{ app.request.basepath }}/modifCategorieTransaction/{{ categorieTransaction.ID }}" method="post">
+                    <div class="form-group">
+                      <div class="input-group">
+                            <div class="col-md-12">
+                                Libellé categorie transaction :<input type="text" name="libelle" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                            <input type="submit" class="btn btn-primary" value="Modifier" />
+                        </div>
+                    </div>        
+                </form>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
             {% endfor %}
         </table>
     </div>
@@ -111,36 +182,39 @@
   Ajouter un categorie transaction
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="ajjoutcattr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Ajout d'un compte</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div >
-    <form action="{{ path('add_categorie_transaction') }}" method="post">
-        <div class="form-group">
-		  <div class="input-group">
-                <div class="col-md-12">
-                    Libellé categorie transaction :<input type="text" name="libelleCategorieTransaction" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
-                <input type="submit" class="btn btn-primary" value="modif" />
-            </div>
-        </div>        
-    </form>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Modal -->
+                <div class="modal fade" id="ajjoutcattr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajout d'un compte</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div >
+                    <form action="{{ path('add_categorie_transaction') }}" method="post">
+                        <div class="form-group">
+                          <div class="input-group">
+                                <div class="col-md-12">
+                                    Libellé categorie transaction :<input type="text" name="libelleCategorieTransaction" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                                <input type="submit" class="btn btn-primary" value="Sauvegarder" />
+                            </div>
+                        </div>        
+                    </form>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+<!-- Modal -->
+
 {% endblock %}

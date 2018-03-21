@@ -109,4 +109,10 @@ class TransactionDAO extends DAO
 			);
 		$this->getDb()->insert('transaction', $data);
 	}
+    
+    public function modificationCategorieTransaction($idCatDel, $idCategorieTransaction)
+    {   
+        $sql = "UPDATE transaction SET IDCategorieTransaction=? WHERE IDCategorieTransaction = ?";
+        $test = $this->getDb()->executeUpdate($sql, array( $idCategorieTransaction, $idCatDel));
+    }
 }

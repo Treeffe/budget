@@ -17,11 +17,12 @@ class CategorieCompteDAO extends DAO
     public function find($id) {
         $sql = "select * from categoriecompte where id = ?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
-
+        
         if ($row)
+            
             return $this->buildDomainObject($row);
-        else
-            throw new \Exception("Aucune categorie de compte n'a été trouvé");
+        //else
+            //throw new \Exception("Aucune categorie de compte n'a été trouvé");
             //throw new \Exception("aucun ".$id);
         
     }
@@ -32,9 +33,12 @@ class CategorieCompteDAO extends DAO
         // Convertit les résultats de requête en tableau d'objets du domaine
         $categories = $this->getDb()->fetchAll($sql);
         foreach ($categories as $row) {
-            if (array_key_exists('id', $row)) {
-            $idCategorie = $row['id'];
-            $categories[$idCategorie] = $this->buildDomainObject($row);
+            if($row['ID'] != "1"){
+                
+                if (array_key_exists('id', $row)) {
+                $idCategorie = $row['id'];
+                $categories[$idCategorie] = $this->buildDomainObject($row);
+                }
             }
         }
         return $categories;
@@ -74,6 +78,17 @@ class CategorieCompteDAO extends DAO
             }
         }
         return $categories;
+    }
+    
+    public function DeleteCategorieCompte($id) {
+        $sql = "DELETE FROM `categorieCompte` WHERE ID = ?";
+        $this->getDb()->executeQuery($sql, array($id));
+    }
+    
+    public function modificationCategorieCompte($idCatDel, $libelle)
+    {   
+        $sql = "UPDATE compte SET libelleCategorieCompte = ? WHERE IDCategorieCompte=?";
+        $this->getDb()->executeUpdate($sql, array( $idCategorieCompte, $libelle));
     }
     
     

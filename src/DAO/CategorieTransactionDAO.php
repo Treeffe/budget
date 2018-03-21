@@ -62,5 +62,10 @@ class CategorieTransactionDAO extends DAO
         return $categories;
     }
     
+    public function DeleteCategorieTransaction($id){
+        $sql = "DELETE FROM `categorieTransaction` WHERE ID = ?";
+        $this->getDb()->executeQuery($sql, array($id));
+    }
+    
     
 }

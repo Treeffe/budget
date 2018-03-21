@@ -67,5 +67,10 @@ class CategorieTransactionDAO extends DAO
         $this->getDb()->executeQuery($sql, array($id));
     }
     
+    public function modificationLibelleCategorieTransaction($idCat, $libelle)
+    {   
+        $sql = "UPDATE categorieTransaction SET libelleCategorieTansaction=? WHERE ID= ?";
+        $test = $this->getDb()->executeUpdate($sql, array( $libelle, $idCat));
+    }
     
 }

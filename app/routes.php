@@ -145,4 +145,24 @@ $app->match('/deleteCategorieTransaction/{idCategorieTransaction}', function(Req
     return $app->redirect($app["url_generator"]->generate('transactions', array('transactions' => $transactions, 'comptes'=>$comptes, 'categoriesTransactions'=>$cats)));
 });
 
+$app->match('/modifCategorieCompte/{idCategorieCompte}', function(Request $request, $idCategorieCompte) use ($app) {
+    
+    $libelle = $_POST['libelle'];
+    $app['dao.CategorieCompte']->modificationLibelleCategorieCompte($idCategorieCompte, $libelle);
+    
+    $transactions = $app['dao.transaction']->findAllTransactions($_SESSION['visiteur']->getId());
+    $comptes = $app['dao.compte']->findAllComptes($_SESSION['visiteur']->getId());
+    $cats = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
+    return $app->redirect($app["url_generator"]->generate('transactions', array('transactions' => $transactions, 'comptes'=>$comptes, 'categoriesTransactions'=>$cats)));
+});
 
+$app->match('/modifCategorieTransaction/{idCategorieTransaction}', function(Request $request, $idCategorieTransaction) use ($app) {
+    
+    $libelle = $_POST['libelle'];
+    $app['dao.categorieTransaction']->modificationLibelleCategorieTransaction($idCategorieTransaction, $libelle);
+    
+    $transactions = $app['dao.transaction']->findAllTransactions($_SESSION['visiteur']->getId());
+    $comptes = $app['dao.compte']->findAllComptes($_SESSION['visiteur']->getId());
+    $cats = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
+    return $app->redirect($app["url_generator"]->generate('transactions', array('transactions' => $transactions, 'comptes'=>$comptes, 'categoriesTransactions'=>$cats)));
+});

@@ -23,7 +23,7 @@ CREATE TABLE Compte(
 ID int NOT NULL AUTO_INCREMENT, 
 IDUser int not null,
 IDCategorieCompte int NOT NULL,
-MontantCompte int not null,
+MontantCompte float not null,
 libelleCompte varchar(255) NOT NULL,  
 PRIMARY KEY (ID) );
 
@@ -34,7 +34,7 @@ IDCompteCredit int NOT NULL,
 IDCompteDebit int NOT NULL,
 idUser int not null,
 date dateTime NOT NULL,
-montant int NOT NULL,
+montant float NOT NULL,
 libelleTransaction varchar(255) NOT NULL,  
 PRIMARY KEY (ID) );
 

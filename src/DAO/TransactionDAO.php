@@ -115,4 +115,34 @@ class TransactionDAO extends DAO
         $sql = "UPDATE transaction SET IDCategorieTransaction=? WHERE IDCategorieTransaction = ?";
         $test = $this->getDb()->executeUpdate($sql, array( $idCategorieTransaction, $idCatDel));
     }
+    
+    public function findByCompte($iCompte) {
+        $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?)";
+        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+        
+        // Convertit les résultats de requête en tableau d'objets du domaine
+        $transactions = array();
+        foreach ($result as $row) {
+            if (array_key_exists('IDCategorieTransaction', $row)) {
+            $id = $row['ID'];
+            $transactions[$id] = $this->buildDomainObject($row);
+            }
+        }
+        return $transactions;
+    }
+    
+    public function findByCompteDebit($idCompte) {
+        $sql = "SELECT * from transaction where IDCompteDebit = (SELECT ID from compte where ID=?)";
+        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+        
+        // Convertit les résultats de requête en tableau d'objets du domaine
+        $transactions = array();
+        foreach ($result as $row) {
+            if (array_key_exists('IDCategorieTransaction', $row)) {
+            $id = $row['ID'];
+            $transactions[$id] = $this->buildDomainObject($row);
+            }
+        }
+        return $transactions;
+    }
 }

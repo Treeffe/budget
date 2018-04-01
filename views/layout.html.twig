@@ -46,6 +46,9 @@
                     <li>
                         <a href="{{ path('compteTransaction') }}">Administration du site</a>
                     </li> 
+                    <li>
+                        <a href="{{ path('transactionsParCompte') }}">Transactions par compte </a>
+                    </li> 
                 </ul>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
@@ -73,7 +76,8 @@
                             </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('login') }}">Se connecter</a></li>
-                                        <li><a href="#"> S'inscrire</a></li>
+                                        <li><a href="{{ path('inscription')}}">S'inscrire</a>
+                                        </li>
                                     </ul>
                         </li>
                     </ul>

@@ -98,10 +98,10 @@ public function loadUserByUsername($username)
              $this->getDb()->update('visiteur', $userData, array('id_visiteur' => $visiteur->getId()));
          } else {
              $userData = array(
-          	'nom_visiteur' => $visiteur->getNom(),
-          	'prenom_visiteur' => $visiteur->getPrenom(),
-              'login_visiteur' => $visiteur->getUsername(),
-              'pwd_visiteur' => $visiteur->getPassword(), 
+          	'nomUser' => $visiteur->getNom(),
+          	'prenomUser' => $visiteur->getPrenom(),
+              'loginUser' => $visiteur->getUsername(),
+              'mdpUser' => $visiteur->getPassword(), 
               'salt' => $visiteur->getSalt(),
 	    'role' => 'role');
               // The user has never been saved : insert it

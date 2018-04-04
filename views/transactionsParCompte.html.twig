@@ -21,7 +21,7 @@
                 </thead>
                 {% for transaction in dictionnaire.transactions %}
                     <tr>
-                        <td>{{ transaction.libelleTransaction }}</td>
+                        <td><a href="{{ app.request.basepath }}/transactions/{{ transaction.ID }}">{{ transaction.libelleTransaction }}</a></td>
                         <td>{{ transaction.categorieTransaction.libelleCategorieTransaction  }}</td>
                         <td>{{ transaction.montant }}</td>
                     </tr>

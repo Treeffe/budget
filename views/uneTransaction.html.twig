@@ -1,0 +1,50 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Informations de la transaction{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 5%">
+<h2 class="text-center">{{ block('title') }}</h2>
+
+{% if transaction %}
+    <div style="margin-top: 5%" class="jumbotron">
+        <div class="col-sm-6 col-md-4">
+        <h2>{{ transaction.libelleTransaction }}</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                
+            </div>
+            <div class="col-sm-6 col-md-6" >
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Information transaction</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Tiers</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Compte débitté</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <h3>montant : </h3><h5>{{ transaction.montant }}</h5>
+                        <h3>date : </h3><h5>{{ transaction.dateTransaction }}</h5>
+                        <h3>categorie : </h3><h5>{{ transaction.categorieTransaction.libelleCategorieTransaction }}</h5>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <h3>tiers:</h3><h4>{{ transaction.compteCredit.libelleCompte }}</h4>
+                        <h3>Montant du compte tiers:</h3><h4>{{ transaction.compteCredit.montantCompte }}</h4>
+                        <h3>Categorie Tiers:</h3><h4>{{ transaction.compteCredit.categorieCompte.libelleCategorieCompte }}</h4>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3>Compte débité :</h3><h4> {{ transaction.compteDebit.libelleCompte }}</h4>
+                        <h3>Montant du compte debité:</h3><h4>{{ transaction.compteDebit.montantCompte }}</h4>
+                        <h3>Categorie compte débité :</h3><h4> {{ transaction.compteDebit.categorieCompte.libelleCategorieCompte }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune transaction trouvé.</div>
+{% endif %}
+    
+{% endblock %}

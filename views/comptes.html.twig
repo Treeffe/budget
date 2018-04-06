@@ -19,7 +19,7 @@
             </thead>
             {% for compte in comptes %}
                 <tr>
-                    <td><a href="{{ app.request.basepath }}/transactionParCompte/{{compte.id}}">{{ compte.libelleCompte }}</a></td>
+                    <td><a href="{{ app.request.basepath }}/comptes/{{compte.id}}">{{ compte.libelleCompte }}</a></td>
                     <td>{{ compte.user.prenom }} {{ compte.user.nom}}</td>
                     <td>{{ compte.categorieCompte.libelleCategorieCompte }}</td>
                     <td>{{ compte.MontantCompte }}</td>

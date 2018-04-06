@@ -118,7 +118,7 @@ class TransactionDAO extends DAO
     
     public function findByCompte($idCompte) {
         $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?) OR IDCompteDebit = (SELECT ID from compte where ID=?)";
-        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+        $result = $this->getDb()->fetchAll($sql, array($idCompte, $idCompte));
         
         // Convertit les résultats de requête en tableau d'objets du domaine
         $transactions = array();
@@ -133,6 +133,21 @@ class TransactionDAO extends DAO
     
     public function findByCompteDebit($idCompte) {
         $sql = "SELECT * from transaction where IDCompteDebit = (SELECT ID from compte where ID=?)";
+        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+        
+        // Convertit les résultats de requête en tableau d'objets du domaine
+        $transactions = array();
+        foreach ($result as $row) {
+            if (array_key_exists('IDCategorieTransaction', $row)) {
+            $id = $row['ID'];
+            $transactions[$id] = $this->buildDomainObject($row);
+            }
+        }
+        return $transactions;
+    }
+    
+    public function findByCompteCredit($idCompte) {
+        $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?)";
         $result = $this->getDb()->fetchAll($sql, array($idCompte));
         
         // Convertit les résultats de requête en tableau d'objets du domaine

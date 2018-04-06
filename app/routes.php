@@ -221,3 +221,14 @@ $app->get('/transactionsParComptes/', function() use ($app) {
     return $app['twig']->render('transactionsParCompte.html.twig', array('dictionnaires' => $dictionnaires));
 })->bind('transactionsParCompte');
 
+$app->get('/transactions/{idTransaction}', function(Request $request, $idTransaction) use ($app) {
+    $transaction = $app['dao.transaction']->find($idTransaction);
+    return $app['twig']->render('uneTransaction.html.twig', array('transaction' => $transaction));
+});
+
+$app->get('/comptes/{idCompte}', function(Request $request, $idCompte) use ($app) {
+    $compte = $app['dao.compte']->find($idCompte);
+    $transactionsCredit = $app['dao.transaction']->findByCompteCredit($idCompte);
+    $transactionsDebit = $app['dao.transaction']->findByCompteDebit($idCompte);
+    return $app['twig']->render('unCompte.html.twig', array('compte' => $compte, 'transactionsCredit' => $transactionsCredit, 'transactionsDebit' => $transactionsDebit));
+});

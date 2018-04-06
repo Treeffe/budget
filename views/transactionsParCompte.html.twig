@@ -8,7 +8,7 @@
 {% if dictionnaires %}
     {% for dictionnaire in dictionnaires %}
         <div>
-            <h2><strong>{{ dictionnaire.compte.libelleCompte }}</strong> - le montant de ce compte est de : {{ dictionnaire.compte.montantCompte }} </h2>
+            <h2><a href="{{ app.request.basepath }}/comptes/{{dictionnaire.compte.id}}"><strong>{{ dictionnaire.compte.libelleCompte }}</strong> - le montant de ce compte est de : {{ dictionnaire.compte.montantCompte }} </a></h2>
         </div>
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
@@ -21,7 +21,7 @@
                 </thead>
                 {% for transaction in dictionnaire.transactions %}
                     <tr>
-                        <td>{{ transaction.libelleTransaction }}</td>
+                        <td><a href="{{ app.request.basepath }}/transactions/{{ transaction.ID }}">{{ transaction.libelleTransaction }}</a></td>
                         <td>{{ transaction.categorieTransaction.libelleCategorieTransaction  }}</td>
                         <td>{{ transaction.montant }}</td>
                     </tr>

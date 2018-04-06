@@ -54,13 +54,13 @@ class TransactionDAO extends DAO
         
         if (array_key_exists('IDCompteDebit', $row)) {
             $idCompteDebit = $row['IDCompteDebit'];
-            $compteDebit = $this->compteDebitDAO->find($idUser);
+            $compteDebit = $this->compteDebitDAO->find($idCompteDebit);
             $transaction->setCompteDebit($compteDebit);
         }
         
         if (array_key_exists('IDCompteCredit', $row)) {
             $idCompteCredit = $row['IDCompteCredit'];
-            $compteCredit = $this->compteCreditDAO->find($idUser);
+            $compteCredit = $this->compteCreditDAO->find($idCompteCredit);
             $transaction->setCompteCredit($compteCredit);
         }
         
@@ -116,9 +116,9 @@ class TransactionDAO extends DAO
         $test = $this->getDb()->executeUpdate($sql, array( $idCategorieTransaction, $idCatDel));
     }
     
-    public function findByCompte($iCompte) {
-        $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?)";
-        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+    public function findByCompte($idCompte) {
+        $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?) OR IDCompteDebit = (SELECT ID from compte where ID=?)";
+        $result = $this->getDb()->fetchAll($sql, array($idCompte, $idCompte));
         
         // Convertit les résultats de requête en tableau d'objets du domaine
         $transactions = array();
@@ -133,6 +133,21 @@ class TransactionDAO extends DAO
     
     public function findByCompteDebit($idCompte) {
         $sql = "SELECT * from transaction where IDCompteDebit = (SELECT ID from compte where ID=?)";
+        $result = $this->getDb()->fetchAll($sql, array($idCompte));
+        
+        // Convertit les résultats de requête en tableau d'objets du domaine
+        $transactions = array();
+        foreach ($result as $row) {
+            if (array_key_exists('IDCategorieTransaction', $row)) {
+            $id = $row['ID'];
+            $transactions[$id] = $this->buildDomainObject($row);
+            }
+        }
+        return $transactions;
+    }
+    
+    public function findByCompteCredit($idCompte) {
+        $sql = "SELECT * from transaction where IDCompteCredit = (SELECT ID from compte where ID=?)";
         $result = $this->getDb()->fetchAll($sql, array($idCompte));
         
         // Convertit les résultats de requête en tableau d'objets du domaine

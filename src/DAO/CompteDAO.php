@@ -26,10 +26,9 @@ class CompteDAO extends DAO
         $compte = new compte();
         $compte->setId($row['ID']);
         $compte->setLibelleCompte($row['libelleCompte']);
-        $compte->setNomTitulaire($row['nomTitulaire']);
-        $compte->setPrenomTitulaire($row['prenomTitulaire']);
         $compte->setMontantCompte($row['MontantCompte']);
         $idCategoriecompte = $row['IDCategorieCompte'];
+        $compte->setDateCompte = $row['Date'];
         $idUser = $row['IDUser'];
         
         
@@ -73,13 +72,14 @@ class CompteDAO extends DAO
             //throw new \Exception("Aucun compte trouvé");
     }
     
-    public function saveCompte($idCategorieCompte, $idUser, $libelle, $montant)
+    public function saveCompte($idCategorieCompte, $idUser, $libelle, $montant, $date)
 	{
 		$data = array(
 			'montantCompte' => $montant,
             'libelleCompte' => $libelle,
             'idCategorieCompte' => $idCategorieCompte,
-            'idUser' => $idUser
+            'idUser' => $idUser,
+            'date' => $date
 			);
 		$this->getDb()->insert('compte', $data);
 	}

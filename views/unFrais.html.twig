@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Informations du frais{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 5%">
+<h2 class="text-center">{{ block('title') }}</h2>
+
+{% if frais %}
+    <div style="margin-top: 5%" class="jumbotron">
+        <div class="col-sm-6 col-md-4">
+        <h2>{{ frais.libelleFrais }}</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                
+            </div>
+            <div class="col-sm-6 col-md-6" >
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Information frais</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <h3>periode : </h3><h5>{{ frais.periode.libellePeriode }}</h5>
+                        <h3>description : </h3><h5>{{ frais.descriptionFrais }}</h5>
+                        <h3>montant : </h3><h5>{{ frais.montantFrais }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucun frais trouvé.</div>
+{% endif %}
+    
+{% endblock %}

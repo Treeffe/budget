@@ -217,4 +217,109 @@
                     </div>
 <!-- Modal -->
 
+<div>
+    <h2>Listes des periodes</h2>
+</div>
+{% if categoriesTransactions %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Libelle</th>
+                </tr>
+            </thead>
+            {% for periode in periodes %}
+            <div class="col-md-12 col-sm-12">
+                <tr>
+                    <div class="col-md-11 col-sm-11"><td>{{ periode.libellePeriode }}</td></div>
+                    <div class="col-md-1 col-sm-1">
+                        <td>
+                            <a type="submit" href="{{ app.request.basepath }}/deletePeriode/{{ periode.ID }}" class="btn btn-danger">
+                                 <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifPeriode">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </button>
+                        </td>
+                    </div>
+                </tr>
+            </div>
+            <div class="modal fade" id="modifPeriode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modifier periode</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div >
+                        <form action="{{ app.request.basepath }}/modificationPeriode/{{ periode.ID }}" method="post">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="col-md-12">
+                                        Libellé période :<input type="text" name="libelle" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                                    <input type="submit" class="btn btn-primary" value="Modifier" />
+                                </div>
+                            </div>        
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune compte trouvé.</div>
+{% endif %}
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPeriode">
+  Ajouter une période
+</button>
+
+
+<!-- Modal -->
+                <div class="modal fade" id="addPeriode" tabindex="-1" role="dialog" aria-labelledby="addPeriode" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addPeriode">Ajout d'une période</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div >
+                    <form action="{{ path('add_periode') }}" method="post">
+                        <div class="form-group">
+                          <div class="input-group">
+                                <div class="col-md-12">
+                                    Libellé periode :<input type="text" name="libelle" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5 col-sm-3" style="margin-top: 10px">
+                                <input type="submit" class="btn btn-primary" value="Sauvegarder" />
+                            </div>
+                        </div>        
+                    </form>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+<!-- Modal -->
+
+
 {% endblock %}

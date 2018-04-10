@@ -38,8 +38,20 @@ montant float NOT NULL,
 libelleTransaction varchar(255) NOT NULL,  
 PRIMARY KEY (ID) );
 
+CREATE TABLE budget.Frais( ID int NOT NULL AUTO_INCREMENT, 
+                          IDUser int not null, 
+                          libelleFrais varchar(255) NOT NULL, 
+                          MontantFrais float not null, 
+                          descriptionFrais varchar(255) NOT NULL, 
+                          `idPeriode` INT NOT NULL,
+                          PRIMARY KEY (ID) );
+                          
+CREATE TABLE Periode( ID int NOT NULL AUTO_INCREMENT, 
+                     libelleCompte varchar(255) NOT NULL, 
+                     PRIMARY KEY (ID) );
 
-INSERT INTO visiteur VALUES (1, 'cornado', 'thibaut', 'cornado@hotmail.fr', 'treef', 'YRKBx8oeQ2sLBrEqjJeqc8UwC9HPp+Ed6dhCeeHPQJ9vY4vbMepUbS14/rE6njWr4RZd4E+tU4pcOMI0h8Z6UA==', 'mnPEaJNz6,rUPbAYGg6$UXt', 'ROLE_ADMIN')
+
+INSERT INTO visiteur VALUES (1, 'cornado', 'thibaut', 'cornado@hotmail.fr', 'treef', 'YRKBx8oeQ2sLBrEqjJeqc8UwC9HPp+Ed6dhCeeHPQJ9vY4vbMepUbS14/rE6njWr4RZd4E+tU4pcOMI0h8Z6UA==', 'mnPEaJNz6,rUPbAYGg6$UXt', 'ROLE_ADMIN');
 
 INSERT INTO `categoriecompte` (`ID`, `libelleCategorieCompte`) VALUES ('1', 'aucune categorie de compte');
 

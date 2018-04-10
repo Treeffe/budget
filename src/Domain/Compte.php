@@ -18,6 +18,16 @@ class Compte
     private $nomTitulaire;
     
     private $prenomTitulaire;
+    
+    private $dateCompte;
+        
+    public function getDateCompte() {
+        return $this->date;
+    }
+
+    public function setDateCompte($date) {
+        $this->dateCompte = $date;
+    }
 
     public function getId() {
         return $this->id;

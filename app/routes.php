@@ -9,6 +9,7 @@ use budget\Domain\Transaction;
 use budget\Domain\CategorieCompte;
 use budget\Domain\Visiteur;
 use budget\Domain\Compte;
+use budget\Domain\Frais;
 use budget\Domain\Dictionnary;
 use budget\Form\Type\CommentType;
 use budget\Form\Type\UserType;
@@ -49,9 +50,10 @@ $app->match('/enregistrement_compte/', function(Request $request) use ($app) {
     $montant = $_POST['montant'];
     $idCategorieCompte = $_POST['categorieCompte'];
     $idUser = $_SESSION['visiteur']->getId();;
+    $date = $_POST['date'];
     
     //sauvegarde dans la bdd
-    $app['dao.compte']->saveCompte($idCategorieCompte, $idUser, $libelle, $montant);
+    $app['dao.compte']->saveCompte($idCategorieCompte, $idUser, $libelle, $montant, $date);
     $app['session']->getFlashBag()->add('success', 'probléme enregistré avec succés.');  
     
     //retourner au controleur
@@ -63,7 +65,8 @@ $app->match('/enregistrement_compte/', function(Request $request) use ($app) {
 $app->get('/compteTransaction/', function() use ($app) {
     $categoriesComptes = $app['dao.CategorieCompte']->findAllCategoriesComptes();
     $categoriesTransactions = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
-    return $app['twig']->render('compteTransaction.html.twig', array('categoriesComptes' => $categoriesComptes, 'categoriesTransactions' => $categoriesTransactions));
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('compteTransaction.html.twig', array('categoriesComptes' => $categoriesComptes, 'categoriesTransactions' => $categoriesTransactions, 'periodes' => $periodes));
 })->bind('compteTransaction');
 
 $app->match('/saveCompteTransaction/', function(Request $request) use ($app) {
@@ -102,10 +105,10 @@ $app->match('/enregistrement_transaction/', function(Request $request) use ($app
     $idUser = $_SESSION['visiteur']->getId();
     $idCompteCredit = $_POST["compteCredit"];
     $idCompteDebit = $_POST["compteDebit"];
-    //$date = $_POST["dateTransaction"];
+    $date = $_POST["date"];
     
     //sauvegarde dans la bdd
-    $app['dao.transaction']->saveTransaction($idCategorieTransaction, $idCompteCredit, $idCompteDebit, $idUser, $libelle, $montant);
+    $app['dao.transaction']->saveTransaction($idCategorieTransaction, $idCompteCredit, $idCompteDebit, $idUser, $libelle, $montant, $date);
     $app['session']->getFlashBag()->add('success', 'probléme enregistré avec succés.');  
     
     //Modification montant des compte
@@ -232,3 +235,69 @@ $app->get('/comptes/{idCompte}', function(Request $request, $idCompte) use ($app
     $transactionsDebit = $app['dao.transaction']->findByCompteDebit($idCompte);
     return $app['twig']->render('unCompte.html.twig', array('compte' => $compte, 'transactionsCredit' => $transactionsCredit, 'transactionsDebit' => $transactionsDebit));
 });
+
+$app->get('/lesFrais/', function() use ($app) {
+    $frais = $app['dao.frais']->findAllFrais($_SESSION['visiteur']->getId());
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('lesFrais.html.twig', array('frais' => $frais, 'periodes' => $periodes));
+})->bind('lesFrais');
+
+$app->get('/lesFrais/{idFrais}', function(Request $request, $idFrais) use ($app) {
+    $frais = $app['dao.frais']->find($idFrais);
+    return $app['twig']->render('unfrais.html.twig', array('frais' => $frais));
+});
+
+$app->match('/saveFrais/', function(Request $request) use ($app) {
+    //récupération information via post
+    $libelle = $_POST['libelle'];
+    $montant = $_POST['montant'];
+    $description = $_POST['descriptionFrais'];
+    $idUser = $_SESSION['visiteur']->getId();
+    $periode = $_POST['periode'];
+    
+    //sauvegarde dans la bdd
+    $app['dao.frais']->saveFrais($idUser, $periode, $description, $libelle, $montant);
+    $app['session']->getFlashBag()->add('success', 'probléme enregistré avec succés.');  
+    
+    //retourner au controleur
+    $frais = $app['dao.frais']->findAllFrais($_SESSION['visiteur']->getId());
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('lesFrais.html.twig', array('frais' => $frais, 'periodes'=>$periodes));
+})->bind('add_frais');
+
+$app->match('/savePeriode/', function(Request $request) use ($app) {
+    //récupération information via post
+    $libelle = $_POST['libelle'];
+    
+    //sauvegarde dans la bdd
+    $app['dao.periode']->savePeriode($libelle);
+    $app['session']->getFlashBag()->add('success', 'probléme enregistré avec succés.');  
+    
+    //retourner au controleur
+    $categoriesComptes = $app['dao.CategorieCompte']->findAllCategoriesComptes();
+    $categoriesTransactions = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('compteTransaction.html.twig', array('categoriesComptes' => $categoriesComptes, 'categoriesTransactions' => $categoriesTransactions, 'periodes' => $periodes));
+})->bind('add_periode');
+
+
+$app->match('/modificationPeriode/{idPeriode}', function(Request $request, $idPeriode) use ($app) {
+    
+    $libelle = $_POST['libelle'];
+    $app['dao.periode']->modificationPeriode($idPeriode, $libelle);
+    
+    $categoriesComptes = $app['dao.CategorieCompte']->findAllCategoriesComptes();
+    $categoriesTransactions = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('compteTransaction.html.twig', array('categoriesComptes' => $categoriesComptes, 'categoriesTransactions' => $categoriesTransactions, 'periodes' => $periodes));
+});
+
+$app->match('/deletePeriode/{idPeriode}', function(Request $request, $idPeriode) use ($app) {
+    $app['dao.periode']->deletePeriode($idPeriode);
+    
+    $categoriesComptes = $app['dao.CategorieCompte']->findAllCategoriesComptes();
+    $categoriesTransactions = $app['dao.categorieTransaction']->findAllCategoriesTransactions();
+    $periodes = $app['dao.periode']->findAllPeriodes();
+    return $app['twig']->render('compteTransaction.html.twig', array('categoriesComptes' => $categoriesComptes, 'categoriesTransactions' => $categoriesTransactions, 'periodes' => $periodes));
+});
+

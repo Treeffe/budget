@@ -72,3 +72,14 @@ $app['dao.CategorieCompte'] = $app->share(function ($app) {
 $app['dao.categorieTransaction'] = $app->share(function ($app) {
     return new budget\DAO\CategorieTransactionDAO($app['db']);
 });
+
+$app['dao.frais'] = $app->share(function ($app) {
+    $fraisDAO = new budget\DAO\FraisDAO($app['db']); 
+    $fraisDAO->setVisiteurDAO(new budget\DAO\VisiteurDAO($app['db']));
+    $fraisDAO->setPeriodeDAO(new budget\DAO\PeriodeDAO($app['db']));
+    return $fraisDAO;
+});
+
+$app['dao.periode'] = $app->share(function ($app) {
+    return new budget\DAO\PeriodeDAO($app['db']);
+});

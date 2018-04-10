@@ -97,7 +97,7 @@ class TransactionDAO extends DAO
             throw new \Exception("Aucun probleme trouvé");
     }
     
-    public function saveTransaction($idCategorieTransaction, $idCompteCredit, $idCompteDebit, $idUser, $libelle, $montant)
+    public function saveTransaction($idCategorieTransaction, $idCompteCredit, $idCompteDebit, $idUser, $libelle, $montant, $date)
 	{
 		$data = array(
             'libelleTransaction' => $libelle,
@@ -105,7 +105,8 @@ class TransactionDAO extends DAO
             'montant' => $montant,
             'IDCompteCredit' =>$idCompteCredit,
             'IDCompteDebit' => $idCompteDebit,
-            'IDCategorieTransaction' => $idCategorieTransaction
+            'IDCategorieTransaction' => $idCategorieTransaction,
+            'date' => $date
 			);
 		$this->getDb()->insert('transaction', $data);
 	}
@@ -160,4 +161,6 @@ class TransactionDAO extends DAO
         }
         return $transactions;
     }
+    
+    
 }
